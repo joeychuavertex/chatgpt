@@ -2,14 +2,10 @@ import openai
 import streamlit as st
 
 openai.api_key = st.secrets["openai_api_key"]
-
-st.title("Chatbot using Davinci")
-
+model_engine = "text-davinci-002"
 
 def fine_tune_model(question, answer):
     prompt = (question, answer)
-
-    model_engine = "text-davinci-002"
 
     completions = openai.Completion.create(
         engine=model_engine,
@@ -36,6 +32,7 @@ def generate_response(prompt, model_engine):
     message = completions.choices[0].text
     return message
 
+st.title("Chatbot using Davinci")
 
 question = st.text_input("Enter a question")
 answer = st.text_area("Enter an answer")
